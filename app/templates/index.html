@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prédiction Churn Client</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .risk {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .loyal {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔮 Prédiction Churn Client</h1>
+        
+        <form method="POST" action="/predict">
+            <label>Catégorie de dépense:</label>
+            <select name="SpendingCategory">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="VIP">VIP</option>
+            </select>
+            
+            <label>Moment préféré de la journée:</label>
+            <select name="PreferredTimeOfDay">
+                <option value="Matin">Matin</option>
+                <option value="Midi">Midi</option>
+                <option value="Après-midi">Après-midi</option>
+                <option value="Soir">Soir</option>
+                <option value="Nuit">Nuit</option>
+            </select>
+            
+            <label>Préférence weekend:</label>
+            <select name="WeekendPreference">
+                <option value="Weekend">Weekend</option>
+                <option value="Semaine">Semaine</option>
+                <option value="Inconnu">Inconnu</option>
+            </select>
+            
+            <label>Taille panier:</label>
+            <select name="BasketSizeCategory">
+                <option value="Petit">Petit</option>
+                <option value="Moyen">Moyen</option>
+                <option value="Grand">Grand</option>
+                <option value="Inconnu">Inconnu</option>
+            </select>
+            
+            <label>Diversité produits:</label>
+            <select name="ProductDiversity">
+                <option value="Spécialisé">Spécialisé</option>
+                <option value="Modéré">Modéré</option>
+                <option value="Explorateur">Explorateur</option>
+            </select>
+            
+            <label>Pays:</label>
+            <input type="text" name="Country" value="France" placeholder="France, Germany...">
+            
+            <button type="submit">Prédire le risque de churn</button>
+        </form>
+        
+        {% if prediction %}
+        <div class="result {% if 'RISQUE' in prediction %}risk{% else %}loyal{% endif %}">
+            {{ prediction }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
