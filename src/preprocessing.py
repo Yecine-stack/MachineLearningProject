@@ -29,14 +29,6 @@ df, df_test = train_test_split(
 if 'Newsletter' in df.columns:
     df = df.drop(columns=['Newsletter'])
     print("Removed 'Newsletter' column (constant value - useless feature)")
-#print(df.groupby('SatisfactionScore').size())
-
-# Check column types
-#print(df.dtypes)
-
-# Check missing values
-#print(df.isnull().sum())
-
 
 median_age = df['Age'].median()
 #df['Age'].fillna(median_age, inplace=True)
@@ -57,7 +49,7 @@ print(df.isnull().sum()[df.isnull().sum() > 0])
 
 #aberrant values
 
-# Define numeric columns and their valid ranges
+# Define numeric columns and their valid ran
 valid_ranges = {
     'CustomerID': (10000, 99999),
     'Recency': (0, 400),
